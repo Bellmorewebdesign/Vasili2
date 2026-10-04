@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vasili</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="home">
+<div id="chrome"></div>
+
+<main id="main">
+  <h1 class="visually-hidden">Vasili</h1>
+
+  <section class="home-hero" aria-roledescription="carousel" aria-label="Pieces">
+    <div class="stage-wrap">
+      <div class="stage" id="stage" tabindex="0" aria-label="Piece images. Use the arrow keys or the controls below to change pieces."></div>
+    </div>
+    <div class="stage-ctrl">
+      <span class="count mono" id="stage-count" aria-live="polite">01 / 04</span>
+      <button type="button" class="tbtn" id="stage-prev">Previous</button>
+      <button type="button" class="tbtn" id="stage-next">Next</button>
+      <a class="tbtn tbtn--line" id="stage-view" href="product.html?id=piece-a">View piece</a>
+    </div>
+  </section>
+
+  <section class="home-coll" aria-label="Collections" id="home-coll"></section>
+</main>
+
+<footer id="strip"></footer>
+
+<script src="data/site-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

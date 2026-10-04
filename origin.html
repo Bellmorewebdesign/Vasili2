@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origin | Vasili</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/origin.css">
+</head>
+<body class="origin on-dark" data-page="origin">
+<a class="skip" href="#o-list-btn">Skip to the form list</a>
+<main id="main" class="o-main">
+  <h1 class="visually-hidden">Origin drawing</h1>
+
+  <div class="o-map" id="o-map">
+    <svg id="o-svg" role="group" aria-label="Drawing. Drag to pan, use the plus and minus controls to zoom. Each form is a button." tabindex="0">
+      <g id="o-world"></g>
+    </svg>
+  </div>
+
+  <div class="o-top">
+    <a class="tbtn" id="o-back" href="info.html#faq-origin">Back</a>
+    <div class="o-tools" role="toolbar" aria-label="Map controls">
+      <button type="button" class="tbtn" id="o-overview">Overview</button>
+      <button type="button" class="tbtn o-zoom" id="o-zoom-out" aria-label="Zoom out">&minus;</button>
+      <button type="button" class="tbtn o-zoom" id="o-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" class="tbtn" id="o-list-btn" aria-haspopup="dialog">Index of forms</button>
+    </div>
+  </div>
+
+  <aside class="o-panel" id="o-panel" aria-labelledby="o-panel-title" hidden>
+    <div class="o-panel__scroll" id="o-panel-body"></div>
+  </aside>
+
+  <dialog class="dlg dlg--dark o-dlg" id="o-study" aria-labelledby="o-study-title"></dialog>
+  <dialog class="dlg dlg--dark o-dlg" id="o-family" aria-labelledby="o-family-title"></dialog>
+  <dialog class="dlg dlg--dark o-list" id="o-list" aria-labelledby="o-list-title"></dialog>
+
+  <p class="visually-hidden" id="o-live" aria-live="polite"></p>
+</main>
+
+<script src="data/site-data.js"></script>
+<script src="data/origin-geometry.js"></script>
+<script src="data/origin-links.js"></script>
+<script src="js/site.js"></script>
+<script src="js/origin-shapes.js"></script>
+<script src="js/origin.js"></script>
+</body>
+</html>
