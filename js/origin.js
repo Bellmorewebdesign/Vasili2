@@ -157,7 +157,7 @@
     if (!panel.hidden) {
       if (window.innerWidth > 820) w -= panel.offsetWidth; else h -= panel.offsetHeight;
     }
-    return { w: w, h: h, top: 48 };
+    return { w: w, h: h, top: window.innerWidth > 820 ? 60 : 52 };
   }
   function animateTo(t) {
     if (anim) cancelAnimationFrame(anim);
@@ -313,15 +313,16 @@
     var h = '<div class="o-panel__head"><span class="mono">' + n.ref + '</span><button type="button" class="tbtn" id="o-close">Close</button></div>';
     if (piece) {
       h += '<figure class="o-photo">' + V.img(piece.stageImage, { variant: "stage", sizes: "360px", eager: true }) + "</figure>" +
-        '<span class="mono">' + piece.number + '</span><h2 id="o-panel-title" tabindex="-1">[Product name]</h2>' +
+        '<span class="mono">Item ' + piece.number + '</span><h2 class="h3" id="o-panel-title" tabindex="-1">[Product name]</h2>' +
+        '<p class="ph ph-2">[Description here]</p>' +
         '<p><span class="o-confirm">[Connection to confirm]</span></p>' +
-        '<p><a class="tbtn tbtn--line" href="product.html?id=' + piece.id + '">View piece</a></p>';
+        '<p><a class="link" href="product.html?id=' + piece.id + '">View piece <span class="arr" aria-hidden="true">&rarr;</span></a></p>';
     } else {
       h += '<div class="o-drawing">' + miniSvg(n) + "</div>" +
-        '<h2 id="o-panel-title" tabindex="-1">[Heading]</h2><p>[Text]</p>';
+        '<h2 class="h3" id="o-panel-title" tabindex="-1">[Heading here]</h2><p class="ph ph-2">[Description here]</p>';
     }
-    h += '<div class="o-actions"><button type="button" class="tbtn tbtn--line" data-view="study">Study</button>' +
-      '<button type="button" class="tbtn tbtn--line" data-view="family">Family</button></div>';
+    h += '<div class="o-actions"><button type="button" class="btn btn--ghost" data-view="study">Study</button>' +
+      '<button type="button" class="btn btn--ghost" data-view="family">Family</button></div>';
 
     var rel = "";
     if (n.parent) rel += '<div class="o-rel"><h3>From</h3><ul><li><button type="button" class="tbtn" data-go="' + n.parent + '">' + nodes[n.parent].ref + "</button></li></ul></div>";
@@ -428,8 +429,9 @@
       art = '<div class="o-study__art">' + branchSvg(id) + "</div>";
     }
     study.innerHTML = '<button type="button" class="tbtn dlg__close" data-close>Close</button>' +
-      '<h2 id="o-study-title">Study <span class="mono">' + n.ref + "</span></h2>" +
-      '<div class="o-study">' + art + '<div><div class="placeholder-box placeholder-box--video">[Video]</div><p style="margin-top:14px">[Text]</p></div></div>';
+      '<h2 class="h3" id="o-study-title">Study <span class="mono">' + n.ref + "</span></h2>" +
+      '<div class="o-study">' + art + '<div><div class="placement" role="img" aria-label="Reserved space for a future video"><span class="placement__label">[Video]</span><span class="placement__note">Study video, 16:9</span></div>' +
+      '<div class="body-copy"><p class="ph ph-3">[Description here]</p></div></div></div>';
   }
 
   function renderFamily(id) {
@@ -450,7 +452,7 @@
       }
     });
     family.innerHTML = '<button type="button" class="tbtn dlg__close" data-close>Close</button>' +
-      '<h2 id="o-family-title">Family <span class="mono">' + nodes[root].ref + "</span></h2>" +
+      '<h2 class="h3" id="o-family-title">Family <span class="mono">' + nodes[root].ref + "</span></h2>" +
       '<ul class="o-sheet">' + cells + "</ul>";
   }
 
@@ -494,7 +496,7 @@
         (kids.length ? "<ul>" + kids.map(li).join("") + "</ul>" : "") + "</li>";
     }
     listDlg.innerHTML = '<button type="button" class="tbtn dlg__close" data-close>Close</button>' +
-      '<h2 id="o-list-title">Index of forms</h2><ul>' + li("chain") + "</ul>";
+      '<h2 class="h3" id="o-list-title">List of forms</h2><ul>' + li("chain") + "</ul>";
   }
   document.getElementById("o-list-btn").addEventListener("click", function (e) {
     renderList();

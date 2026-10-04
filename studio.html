@@ -3,25 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Studio | Vasili</title>
+<title>About | Vasili</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
-<body data-page="studio">
+<body data-page="about">
 <div id="chrome"></div>
 
 <main id="main">
-  <div class="page">
-    <div class="page-head"><h1>Studio</h1></div>
-    <div class="tabs" role="tablist" aria-label="Studio sections" id="tabs"></div>
+  <div class="wrap">
+    <header class="page-head">
+      <ol class="crumbs"><li><a href="index.html">Home</a></li><li>About</li></ol>
+      <span class="eyebrow">Studio</span>
+      <h1 class="display">About</h1>
+    </header>
+    <div class="tabs" role="tablist" aria-label="About sections" id="tabs"></div>
     <div id="panels"></div>
   </div>
+  <div class="sec"></div>
 </main>
 
-<footer id="strip"></footer>
+<div id="site-end"></div>
 
 <script src="data/site-data.js"></script>
 <script src="js/site.js"></script>

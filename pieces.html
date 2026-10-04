@@ -3,29 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pieces | Vasili</title>
+<title>Shop | Vasili</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
-<body data-page="pieces">
+<body data-page="shop">
 <div id="chrome"></div>
 
 <main id="main">
-  <div class="page">
-    <div class="page-head">
-      <h1>Pieces</h1>
-      <ul class="filters" id="filters" aria-label="Filter pieces"></ul>
+  <div class="wrap">
+    <header class="page-head">
+      <ol class="crumbs"><li><a href="index.html">Home</a></li><li id="crumb-cur">Shop</li></ol>
+      <span class="eyebrow">Shop</span>
+      <h1 class="display" id="shop-title">All pieces</h1>
+      <p class="lead ph ph-1">[Short introduction]</p>
+    </header>
+    <div class="toolbar">
+      <ul class="filters" id="filters" aria-label="Filter by category"></ul>
+      <a class="link" href="info.html#custom">Custom Inquiries <span class="arr" aria-hidden="true">&rarr;</span></a>
     </div>
-    <ul class="ex-grid" id="grid" aria-live="polite"></ul>
+    <ul class="pgrid" id="grid" aria-live="polite"></ul>
   </div>
+  <div class="sec"></div>
 
   <dialog class="dlg qv-dlg" id="qv" aria-labelledby="qv-title"></dialog>
 </main>
 
-<footer id="strip"></footer>
+<div id="site-end"></div>
 
 <script src="data/site-data.js"></script>
 <script src="js/site.js"></script>

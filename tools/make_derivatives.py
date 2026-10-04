@@ -16,6 +16,7 @@ STAGE_CROPS = {
     "One-Thirty_New_York0539.jpg": (0.503, 0.503, 0.62),
     "Capture_One_Catalog0006_07f31f3d-f59c-4f2c-b5cc-4638f0a9559e.jpg": (0.50, 0.54, 0.82),
     "Capture_One_Catalog0004.jpg": (0.50, 0.54, 0.82),
+    "Capture_One_Catalog0009.jpg": (0.50, 0.50, 1.0),
 }
 
 

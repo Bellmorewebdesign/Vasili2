@@ -1,37 +1,54 @@
-/* Journal: News and journal entries in one visual index. Entries open in an accessible panel.
-   The [Ad] placement lives here, not on the homepage. ?entry=j01 opens an entry directly. */
+/* Journal: News and journal entries in one index. The first entry is featured; the rest form a grid
+   with one labeled advertisement placement. Entries open in an accessible panel (?entry=j01). */
 (function () {
   "use strict";
   var V = window.VASILI;
   var list = document.getElementById("jr");
+  var feature = document.getElementById("jr-feature");
   var dlg = document.getElementById("jr-dlg");
 
-  list.innerHTML = V.journal.map(function (e) {
-    if (e.ad) return '<li class="is-ad"><div class="placeholder-box ad-box">[Ad]</div></li>';
-    return '<li class="size-' + e.size + '"><button type="button" class="jr-entry" data-entry="' + e.id + '" aria-haspopup="dialog">' +
-      '<div class="cover">' + V.img(e.image, { sizes: "(max-width: 820px) 90vw, 30vw", alt: "" }) + "</div>" +
-      '<span class="jr-meta"><span class="mono">' + e.number + "</span><span>" + e.kind + "</span><span>[Heading]</span></span>" +
+  var entries = V.journal.filter(function (e) { return !e.ad; });
+  var first = entries[0];
+
+  feature.innerHTML = '<article class="jr-feature">' +
+    '<div class="jr-feature__media">' + V.media(first.image, { ratio: "r-45", sizes: "(max-width: 900px) 100vw, 58vw", eager: true }) + "</div>" +
+    '<div class="jr-feature__text"><div class="jr-meta"><span class="mono">' + first.number + "</span><span>" + first.kind + "</span></div>" +
+      '<h2 class="h2">[Heading here]</h2><p class="ph ph-2">[Short summary]</p>' +
+      '<button type="button" class="btn btn--ghost" data-entry="' + first.id + '" aria-haspopup="dialog">Read entry</button></div>' +
+    "</article>";
+
+  list.innerHTML = V.journal.slice(1).map(function (e) {
+    if (e.ad) {
+      return '<li class="ad-slot"><div class="placement" role="img" aria-label="Reserved space for a future advertisement">' +
+        '<span class="placement__label">[Ad]</span><span class="placement__note">Advertisement, 4:5</span></div></li>';
+    }
+    return '<li><button type="button" class="jr-card" data-entry="' + e.id + '" aria-haspopup="dialog">' +
+      V.media(e.image, { ratio: "r-45", sizes: "(max-width: 900px) 100vw, 33vw", alt: "" }) +
+      '<div class="jr-meta"><span class="mono">' + e.number + "</span><span>" + e.kind + "</span></div>" +
+      '<h3 class="h3">[Heading here]</h3><p class="ph ph-1">[Short summary]</p><span class="read">Read entry</span>' +
       "</button></li>";
   }).join("");
 
-  function entry(id) { return V.journal.find(function (e) { return e.id === id; }); }
+  function entry(id) { return entries.find(function (e) { return e.id === id; }); }
 
   function open(id, opener) {
     var e = entry(id);
     if (!e) return;
     dlg.innerHTML =
-      '<button type="button" class="tbtn dlg__close" data-close data-autofocus>Close</button>' +
+      '<button type="button" class="tbtn dlg__close" data-close>Close</button>' +
       '<div class="jr-dlg__body">' +
-        '<div class="cover">' + V.img(e.image, { sizes: "(max-width: 640px) 100vw, 490px" }) + "</div>" +
-        '<div class="jr-dlg__copy"><span class="mono">' + e.number + " " + e.kind + '</span><h2 id="jr-dlg-title">[Heading]</h2><p>[Text]</p></div>' +
+        V.media(e.image, { ratio: "r-45", sizes: "(max-width: 760px) 100vw, 540px" }) +
+        '<div class="jr-dlg__copy"><div class="jr-meta" style="margin-top:0"><span class="mono">' + e.number + "</span><span>" + e.kind + "</span></div>" +
+          '<h2 class="h2" id="jr-dlg-title">[Heading here]</h2>' +
+          '<div class="body-copy"><p class="lead ph ph-1">[Introduction here]</p><p class="ph ph-3">[Text here]</p><p class="ph ph-2">[Text here]</p></div>' +
+        "</div>" +
       "</div>";
     V.openDialog(dlg, opener);
-    var url = new URL(window.location.href);
-    url.searchParams.set("entry", id);
-    history.replaceState(null, "", "journal.html" + url.search);
+    dlg.querySelector("[data-close]").focus();
+    history.replaceState(null, "", "journal.html?entry=" + encodeURIComponent(id));
   }
 
-  list.addEventListener("click", function (ev) {
+  document.getElementById("main").addEventListener("click", function (ev) {
     var b = ev.target.closest("[data-entry]");
     if (b) open(b.getAttribute("data-entry"), b);
   });
@@ -41,5 +58,5 @@
   dlg._onclose = function () { history.replaceState(null, "", "journal.html"); };
 
   var start = V.param("entry");
-  if (start) open(start, list.querySelector('[data-entry="' + start + '"]'));
+  if (start) open(start, document.querySelector('[data-entry="' + start + '"]'));
 })();
