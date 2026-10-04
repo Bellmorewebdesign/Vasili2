@@ -3,64 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Info | Vasili</title>
+<title>FAQ and help | Vasili</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body data-page="info">
 <div id="chrome"></div>
 
 <main id="main">
-  <div class="page">
-    <div class="page-head"><h1>Info</h1></div>
+  <div class="wrap">
+    <header class="page-head">
+      <ol class="crumbs"><li><a href="index.html">Home</a></li><li>Help</li></ol>
+      <span class="eyebrow">Help</span>
+      <h1 class="display">FAQ and help</h1>
+      <p class="lead ph ph-1">[Short introduction]</p>
+    </header>
     <div class="info-layout">
-      <ul class="info-toc" aria-label="Info sections">
+      <ul class="info-toc" aria-label="Sections">
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#custom">Custom Inquiries</a></li>
         <li><a href="#shipping">Shipping</a></li>
         <li><a href="#returns">Returns</a></li>
       </ul>
-      <div>
+      <div class="info-main">
         <section class="info-sec faq" id="faq" aria-labelledby="faq-h">
-          <h2 id="faq-h">FAQ</h2>
-          <details><summary>[Heading]</summary><div class="answer"><p>[Text]</p></div></details>
-          <details><summary>[Heading]</summary><div class="answer"><p>[Text]</p></div></details>
-          <details id="faq-origin"><summary>[Heading]</summary><div class="answer"><p>[Text]</p><p><a href="origin.html?entry=faq">See origin</a></p></div></details>
-          <details><summary>[Heading]</summary><div class="answer"><p>[Text]</p></div></details>
-          <details><summary>[Heading]</summary><div class="answer"><p>[Text]</p></div></details>
+          <h2 class="h2" id="faq-h">FAQ</h2>
+          <details><summary>[Question here]</summary><div class="answer"><p>[Answer here]</p></div></details>
+          <details><summary>[Question here]</summary><div class="answer"><p>[Answer here]</p></div></details>
+          <details id="faq-origin"><summary>[Question about the drawings here]</summary><div class="answer"><p>[Answer here]</p><p><a href="origin.html?entry=faq">See origin</a></p></div></details>
+          <details><summary>[Question here]</summary><div class="answer"><p>[Answer here]</p></div></details>
+          <details><summary>[Question here]</summary><div class="answer"><p>[Answer here]</p></div></details>
+          <details><summary>[Question here]</summary><div class="answer"><p>[Answer here]</p></div></details>
         </section>
 
         <section class="info-sec" id="custom" aria-labelledby="custom-h">
-          <h2 id="custom-h">Custom Inquiries</h2>
-          <h3>[Heading]</h3>
-          <p>[Text]</p>
+          <h2 class="h2" id="custom-h">Custom Inquiries</h2>
+          <p class="lead ph ph-2">[Short introduction]</p>
           <form class="inquiry" novalidate data-inert-form aria-describedby="inq-pending">
-            <div class="form-row"><label for="inq-email">Email</label><input id="inq-email" type="email" placeholder="[Email]" autocomplete="off"></div>
-            <div class="form-row"><label for="inq-text">Message</label><textarea id="inq-text" placeholder="[Text]"></textarea></div>
-            <div class="form-actions"><button type="submit" disabled>Send</button><span class="mono" id="inq-pending">[Submission pending]</span></div>
+            <div class="form-2">
+              <div class="form-row"><label for="inq-name">Name</label><input class="field" id="inq-name" type="text" placeholder="[Name]" autocomplete="off"></div>
+              <div class="form-row"><label for="inq-email">Email</label><input class="field" id="inq-email" type="email" placeholder="[Email]" autocomplete="off"></div>
+            </div>
+            <div class="form-row"><label for="inq-text">Message</label><textarea class="field" id="inq-text" placeholder="[Message]"></textarea></div>
+            <button type="submit" class="btn" disabled>Send inquiry</button>
+            <span class="pending" id="inq-pending">[Submission pending]</span>
           </form>
         </section>
 
-        <section class="info-sec" id="shipping" aria-labelledby="shipping-h">
-          <h2 id="shipping-h">Shipping</h2>
-          <h3>[Heading]</h3>
-          <p>[Text]</p>
+        <section class="info-sec policy" id="shipping" aria-labelledby="shipping-h">
+          <h2 class="h2" id="shipping-h">Shipping</h2>
+          <p class="lead ph ph-1">[Short introduction]</p>
+          <h3>[Heading here]</h3>
+          <p class="ph ph-2">[Text here]</p>
+          <h3>[Heading here]</h3>
+          <p class="ph ph-2">[Text here]</p>
         </section>
 
-        <section class="info-sec" id="returns" aria-labelledby="returns-h">
-          <h2 id="returns-h">Returns</h2>
-          <h3>[Heading]</h3>
-          <p>[Text]</p>
+        <section class="info-sec policy" id="returns" aria-labelledby="returns-h">
+          <h2 class="h2" id="returns-h">Returns</h2>
+          <p class="lead ph ph-1">[Short introduction]</p>
+          <h3>[Heading here]</h3>
+          <p class="ph ph-2">[Text here]</p>
+          <h3>[Heading here]</h3>
+          <p class="ph ph-2">[Text here]</p>
         </section>
       </div>
     </div>
   </div>
 </main>
 
-<footer id="strip"></footer>
+<div id="site-end"></div>
 
 <script src="data/site-data.js"></script>
 <script src="js/site.js"></script>

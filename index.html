@@ -5,33 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vasili</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body data-page="home">
 <div id="chrome"></div>
 
 <main id="main">
-  <h1 class="visually-hidden">Vasili</h1>
-
-  <section class="home-hero" aria-roledescription="carousel" aria-label="Pieces">
-    <div class="stage-wrap">
-      <div class="stage" id="stage" tabindex="0" aria-label="Piece images. Use the arrow keys or the controls below to change pieces."></div>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__text">
+      <span class="eyebrow">[Short label]</span>
+      <h1 class="display" id="hero-title">[Heading here]</h1>
+      <p class="lead ph ph-2">[Short introduction]</p>
+      <div class="btn-row">
+        <a class="btn" href="pieces.html">Shop all pieces</a>
+        <a class="btn btn--ghost" href="collection.html?id=city">View collection</a>
+      </div>
+      <nav class="hero__browse" aria-label="Browse">
+        <span>Browse</span>
+        <a href="pieces.html?cat=bracelets">Bracelets</a>
+        <a href="pieces.html?cat=rings">Rings</a>
+        <a href="collection.html?id=city">City</a>
+        <a href="collection.html?id=nic">NIC</a>
+      </nav>
     </div>
-    <div class="stage-ctrl">
-      <span class="count mono" id="stage-count" aria-live="polite">01 / 04</span>
-      <button type="button" class="tbtn" id="stage-prev">Previous</button>
-      <button type="button" class="tbtn" id="stage-next">Next</button>
-      <a class="tbtn tbtn--line" id="stage-view" href="product.html?id=piece-a">View piece</a>
+    <div class="hero__media" id="hero-media"></div>
+  </section>
+
+  <section class="sec sec--soft" aria-labelledby="featured-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__text">
+          <span class="eyebrow">Pieces</span>
+          <h2 class="h2" id="featured-title">[Heading here]</h2>
+          <p class="lead ph ph-1">[Short introduction]</p>
+        </div>
+        <div class="sec-head__aside">
+          <ul class="cat-links" aria-label="Categories">
+            <li><a href="pieces.html?cat=bracelets">Bracelets</a></li>
+            <li><a href="pieces.html?cat=rings">Rings</a></li>
+          </ul>
+          <a class="link" href="pieces.html">Shop all <span class="arr" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <ul class="pgrid" id="featured"></ul>
     </div>
   </section>
 
-  <section class="home-coll" aria-label="Collections" id="home-coll"></section>
+  <section class="sec" aria-labelledby="coll-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__text">
+          <span class="eyebrow">Collections</span>
+          <h2 class="h2" id="coll-title">[Heading here]</h2>
+        </div>
+      </div>
+      <ul class="ctiles" id="ctiles"></ul>
+    </div>
+  </section>
+
+  <section class="sec sec--soft" aria-labelledby="about-title">
+    <div class="wrap split">
+      <div class="split__media" id="about-media"></div>
+      <div class="split__text">
+        <span class="eyebrow">About</span>
+        <h2 class="h2" id="about-title">[Heading here]</h2>
+        <div class="body-copy">
+          <p class="lead ph ph-2">[Introduction here]</p>
+          <p class="ph ph-2">[Description here]</p>
+        </div>
+        <a class="btn btn--ghost" href="studio.html">About Vasili</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band--navy" aria-labelledby="video-title">
+    <div class="wrap video-band">
+      <div class="video-band__text">
+        <span class="eyebrow">Video</span>
+        <h2 class="h2" id="video-title">[Heading here]</h2>
+        <p class="lead muted ph ph-2">[Short introduction]</p>
+      </div>
+      <div class="video-band__frame">
+        <div class="placement r-169" role="img" aria-label="Reserved space for a future client video">
+          <span class="placement__label">[Video]</span>
+          <span class="placement__note">Client video, 16:9</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer id="strip"></footer>
+<div id="site-end"></div>
 
 <script src="data/site-data.js"></script>
 <script src="js/site.js"></script>

@@ -1,6 +1,6 @@
 /*
   Vasili2 prototype data layer.
-  Edit this file to change products, collections, homepage slides, and journal entries.
+  Edit this file to change products, collections, the homepage, and journal entries.
   Every page reads from here, so product records are never duplicated across pages.
 
   Text rules: visible editorial text stays as placeholders ([Product name], [Heading], ...).
@@ -24,7 +24,7 @@ window.VASILI.images = {
   "mirror-wrist":    { file: "C8B550E0-0F4B-4EF6-B19E-87D13B946520", w: 1365, h: 2048,
                        alt: "Close view of a silver link bracelet on a wrist against black" },
 
-  "extendo-studio":  { file: "Capture_One_Catalog0009", w: 3341, h: 3341, light: true,
+  "extendo-studio":  { file: "Capture_One_Catalog0009", w: 3341, h: 3341, stage: true, light: true,
                        alt: "Heavy silver link bracelet with spiked links and engraved clasp, on white" },
   "extendo-detail":  { file: "DSC09915", w: 4348, h: 3161, light: true,
                        alt: "Detail of heavy silver links with spikes and an engraved triangular clasp" },
@@ -112,14 +112,17 @@ window.VASILI.products = [
 ];
 
 /* Collections. City and NIC are inherited draft labels. Membership is PROVISIONAL.
-   `layout` selects one of the two compositions in collection.html. */
+   `layout` selects one of the two compositions in collection.html:
+   "landscape" opens with a wide banner, "portrait" with a split portrait image.
+   `tileImage` is used on the homepage and in menus; `editorialImage` completes the piece grid. */
 window.VASILI.collections = [
   {
     id: "city",
     title: "City",
     layout: "landscape",
     heroImage: "extendo-clasp",
-    tileImage: "extendo-hand",
+    tileImage: "extendo-neck",
+    editorialImage: "mirror-seated",
     pieces: ["piece-a", "piece-b"],
     provisional: true
   },
@@ -129,6 +132,7 @@ window.VASILI.collections = [
     layout: "portrait",
     heroImage: "spur-worn",
     tileImage: "lull-worn",
+    editorialImage: "lull-worn",
     pieces: ["piece-c", "piece-d"],
     provisional: true
   },
@@ -138,21 +142,19 @@ window.VASILI.collections = [
     layout: "landscape",
     heroImage: "extendo-detail",
     tileImage: "mirror-pocket",
+    editorialImage: "mirror-bike",
     pieces: ["piece-a", "piece-d"],
     provisional: true
   }
 ];
 
-/* Homepage object stage. Four slides; `inset` must come from the same photo group as `image`. */
-window.VASILI.slides = [
-  { product: "piece-a", image: "mirror-studio",  inset: "mirror-wrist" },
-  { product: "piece-b", image: "extendo-studio", inset: "extendo-neck" },
-  { product: "piece-c", image: "spur-studio",    inset: "spur-worn" },
-  { product: "piece-d", image: "lull-studio",    inset: "lull-worn" }
-];
-
-/* Homepage collection composition. */
-window.VASILI.homeCollections = { tall: "city", small: "nic" };
+/* Homepage. The hero photograph, featured pieces, collection tiles and the image-and-text section. */
+window.VASILI.home = {
+  heroImage: "flame",
+  featured: ["piece-a", "piece-b", "piece-c", "piece-d"],
+  collections: ["city", "nic", "sample"],
+  aboutImage: "extendo-hand"
+};
 
 /* Journal: News and journal entries combined. Titles and text are placeholders. */
 window.VASILI.journal = [
@@ -167,7 +169,7 @@ window.VASILI.journal = [
 
 /* Studio sections (formerly About, Preface, Collaborations). */
 window.VASILI.studio = [
-  { id: "about",          label: "About",          image: "flame",        second: "extendo-hand" },
-  { id: "preface",        label: "Preface",        image: "spur-worn",    second: null },
+  { id: "about",          label: "About",          image: "mirror-wrist", second: "extendo-hand" },
+  { id: "preface",        label: "Preface",        image: "spur-worn",    second: "extendo-end" },
   { id: "collaborations", label: "Collaborations", image: "mirror-seated", second: "mirror-pocket" }
 ];

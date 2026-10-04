@@ -1,25 +1,33 @@
 # Vasili2
 
-Second visual prototype for Vasili: a pale-blue jewelry gallery with a navy side rail, an object stage on the homepage, and a hidden interactive drawing. Plain HTML, CSS and JavaScript. No build step, no server code, no transactions, and no data is stored or sent.
+Visual prototype for Vasili: a polished jewelry-brand site in the brand's blue palette, with the real logo and photography, plus a hidden interactive drawing. Plain HTML, CSS and JavaScript. No build step, no server code, no transactions, and no data is stored or sent.
 
-The brief for this option is in `docs/VASILI2_BRIEF.md`. It replaces the creative and page-structure instructions in the original asset pack, which are kept unchanged in `docs/pack/` for reference only.
+The current direction is a conventional, easy-to-browse layout: a horizontal header, a full homepage composition, and normal vertical scrolling. It replaces the earlier experimental side-rail homepage. The original brief is in `docs/VASILI2_BRIEF.md`, and the asset pack's original instructions are kept unchanged in `docs/pack/` for reference only.
 
-## Pages
+## Structure
+
+Header on every page: logo, Shop (opens a menu of categories and collections), About, Journal, FAQ. On phones it becomes a logo and a Menu button that opens the same links. Every page ends with an email signup band and a full footer (Shop, Collections, About, Help).
 
 | File | What it is |
 | --- | --- |
-| `index.html` | Homepage: dark object stage with four slides (Previous, Next, swipe, arrow keys), then City, NIC and a `[Video]` frame |
-| `pieces.html` | All sample pieces in an asymmetric grid. Filters: All, Bracelets, Rings (`?cat=rings` works too). Optional Quick view |
-| `collection.html?id=city` | Landscape opening image, sparse two-column pieces |
-| `collection.html?id=nic` | Offset portrait opening image, staggered pieces |
+| `index.html` | Homepage: photo hero with heading, introduction and Shop buttons; featured pieces; collections; image-and-text About section; video placement |
+| `pieces.html` | Shop: all pieces with filters (All pieces, Bracelets, Rings; `?cat=rings` works too) and an optional Quick view |
+| `collection.html?id=city` | Wide banner opening, then the collection's pieces |
+| `collection.html?id=nic` | Portrait photo beside the title, then the collection's pieces |
 | `collection.html?id=sample` | A third `[Collection]` placeholder using the same template |
-| `product.html?id=piece-a` | Product stage, thumbnails, lightbox, Details accordion, `[Video]`, related pieces. Ids: `piece-a` to `piece-d` |
-| `studio.html` | About, Preface and Collaborations as three tabs (`#about`, `#preface`, `#collaborations`) |
-| `journal.html` | News and journal entries in one index, with the `[Ad]` placement. Entries open in a panel (`?entry=j01`) |
-| `info.html` | FAQ, Custom Inquiries, Shipping, Returns (`#faq`, `#custom`, `#shipping`, `#returns`) |
+| `product.html?id=piece-a` | Gallery with zoom, description (with the quiet See origin link), size area on rings, Inquire button, Details / Care / Shipping accordions, video placement, more pieces. Ids: `piece-a` to `piece-d` |
+| `studio.html` | About, with About, Preface and Collaborations as tabs (`#about`, `#preface`, `#collaborations`) |
+| `journal.html` | News and journal: a featured entry, a grid of entries and one labeled `[Ad]` placement. Entries open in a panel (`?entry=j01`) |
+| `info.html` | FAQ and help: FAQ, Custom Inquiries form, Shipping, Returns (`#faq`, `#custom`, `#shipping`, `#returns`) |
 | `origin.html` | The hidden drawing (see below) |
 
-Index (in the rail and the mobile menu) is an overlay for City, NIC, the placeholder collection and the category filters. Info is a small overlay with the four info links. Neither links to the drawing.
+### Placeholder text
+
+The client's writing is not in yet, so every text area shows a short bracketed placeholder in the real typography, such as `[Heading here]`, `[Short introduction]`, `[Product name]` and `[Description here]`. Where a paragraph will run to several lines, faint line marks under the placeholder hold that space, so sections keep their final proportions instead of collapsing. Remove the `ph` and `ph-N` classes from an element once its real text is in.
+
+There is no invented copy, pricing, product claims or story. Purchase is not active: product pages offer "Inquire about this piece" (a link to Custom Inquiries) with a `[Price and purchase pending]` note. The email and inquiry forms are disabled and send nothing.
+
+Video and ad spaces are framed and labeled (`[Video]`, `[Ad]`) with no playback or live integration.
 
 ## The hidden drawing
 
@@ -28,14 +36,16 @@ Index (in the rail and the mobile menu) is an overlay for City, NIC, the placeho
 1. Product page > Details > See origin (`origin.html?node=demo-a&piece=piece-a`)
 2. The third FAQ answer on `info.html`, once expanded (`origin.html?entry=faq`)
 
-It is not linked from the homepage, rail, mobile menu, Index, footer, collection tiles or product cards. This is discoverability, not protection: anyone with the URL can open it.
+It is not linked from the header, Shop menu, mobile menu, homepage, footer, collection tiles or product cards. This is discoverability, not protection: anyone with the URL can open it.
+
+It is drawn as a white sheet with dark chain linework and muted-blue connectors, close to the client's drawings and the white-background product photos.
 
 How it behaves:
 
 - FAQ entry starts near the central chain with only the forms attached to it showing. Selecting a form reveals the next level of its branch (up to four levels on some branches). A small blue dot marks forms that still have hidden attachments.
 - A product entry reveals the path to that node, focuses it, and opens the product panel straight away.
 - Every selection is a real history entry (`?node=...&piece=...&view=study`), so refresh and the browser Back button keep the node and panel.
-- Controls: Back (returns to the product or FAQ you came from), Overview, zoom out, zoom in, and Index of forms (an accessible list alternative to the map). Drag to pan, scroll or pinch to zoom, arrow keys pan, plus and minus zoom.
+- Controls: Back (returns to the product or FAQ you came from), Overview, zoom out, zoom in, and List of forms (an accessible list alternative to the map). Drag to pan, scroll or pinch to zoom, arrow keys pan, plus and minus zoom.
 - Each panel has Study (larger drawing of the branch plus a `[Video]` frame; on the chain it adds the straight chain studies) and Family (a contact sheet of the branch and any linked photos).
 - Panels for linked nodes are marked `[Connection to confirm]`.
 
@@ -54,8 +64,9 @@ Visible editorial text is placeholder only: `[Heading]`, `[Text]`, `[Product nam
 ## Images
 
 - Originals are untouched in `assets/photos/` and `references/`.
-- Web copies (800 and 1600 pixels wide, plus tighter 4:5 crops of three studio shots) are in `assets/web/`. To regenerate them: `python3 tools/make_derivatives.py` (needs Pillow).
-- The logo is the supplied `assets/brand/vasili-logo-white.svg`, used as is on navy. The black logo JPG is not used.
+- Web copies (800 and 1600 pixels wide, plus 4:5 crops of the four studio shots) are in `assets/web/`. To regenerate them: `python3 tools/make_derivatives.py` (needs Pillow).
+- The logo is the supplied `assets/brand/vasili-logo-white.svg`, used as is on the navy header and footer. The black logo JPG is not used.
+- Fonts (Cormorant Garamond, Hanken Grotesk, IBM Plex Mono) are self-hosted in `assets/fonts/` under the SIL Open Font License, so the site does not depend on Google Fonts.
 - Raw reference photos and originals are in the repository, so they are downloadable from a public deployment. Remove them from the published branch if that matters.
 
 ## Deploy on GitHub Pages
@@ -88,7 +99,7 @@ Photo groups (from `data/photo-groups.json`, which came from the old store's pro
 
 - Some worn photos show other jewelry too (for example `20210107-_F6A3947-Edit` also shows rings; `VASILI121` shows several thin pieces). Confirm each photo belongs with its group.
 - `cropextedobb` shows the piece worn at the neck although its group is a bracelet.
-- `DSC07321` (hands over flame) is not in any group. It is used only in Studio and Journal.
+- `DSC07321` (hands over flame) is not in any group. It is the homepage hero and the featured Journal image.
 
 Collection membership (all provisional):
 

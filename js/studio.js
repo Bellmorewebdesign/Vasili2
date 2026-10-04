@@ -1,4 +1,4 @@
-/* Studio: About, Preface and Collaborations as three selectable sections (ARIA tabs).
+/* About page: About, Preface and Collaborations as three selectable sections (ARIA tabs).
    The hash (#about, #preface, #collaborations) selects a section and survives refresh. */
 (function () {
   "use strict";
@@ -12,10 +12,17 @@
   }).join("");
 
   panels.innerHTML = secs.map(function (s) {
+    var second = s.second || s.image;
     return '<section class="studio-panel" role="tabpanel" id="panel-' + s.id + '" aria-labelledby="tab-' + s.id + '" tabindex="0" hidden>' +
-      '<div class="main-img cover">' + V.img(s.image, { sizes: "(max-width: 820px) 100vw, 45vw" }) + "</div>" +
-      '<div class="copy"><h2>[Heading]</h2><p>[Text]</p></div>' +
-      (s.second ? '<div class="second cover">' + V.img(s.second, { sizes: "(max-width: 820px) 60vw, 22vw" }) + "</div>" : "") +
+      '<div class="split">' +
+        '<div class="split__media">' + V.media(s.image, { ratio: "r-45", sizes: "(max-width: 900px) 100vw, 50vw" }) + "</div>" +
+        '<div class="split__text"><span class="eyebrow">' + s.label + '</span><h2 class="h2">[Heading here]</h2>' +
+          '<div class="body-copy"><p class="lead ph ph-2">[Introduction here]</p><p class="ph ph-3">[Text here]</p></div></div>' +
+      "</div>" +
+      '<div class="studio-row">' +
+        '<div class="studio-row__text"><h3 class="h3">[Heading here]</h3><div class="body-copy"><p class="ph ph-3">[Text here]</p></div></div>' +
+        '<div class="studio-row__media">' + V.media(second, { ratio: "r-34", sizes: "(max-width: 900px) 100vw, 40vw" }) + "</div>" +
+      "</div>" +
       "</section>";
   }).join("");
 
@@ -31,10 +38,13 @@
       if (on && focus) t.focus();
     });
   }
-
   function fromHash() {
     var h = window.location.hash.slice(1);
     return secs.some(function (s) { return s.id === h; }) ? h : secs[0].id;
+  }
+  function selectedId() {
+    var sel = tabs.querySelector('[aria-selected="true"]');
+    return sel ? sel.id.replace("tab-", "") : secs[0].id;
   }
 
   tabs.addEventListener("click", function (e) {
@@ -46,7 +56,7 @@
   });
   tabs.addEventListener("keydown", function (e) {
     var ids = secs.map(function (s) { return s.id; });
-    var cur = ids.indexOf(fromHashOrSelected());
+    var cur = ids.indexOf(selectedId());
     var next = null;
     if (e.key === "ArrowRight") next = (cur + 1) % ids.length;
     if (e.key === "ArrowLeft") next = (cur - 1 + ids.length) % ids.length;
@@ -57,10 +67,6 @@
     history.replaceState(null, "", "#" + ids[next]);
     select(ids[next], true);
   });
-  function fromHashOrSelected() {
-    var sel = tabs.querySelector('[aria-selected="true"]');
-    return sel ? sel.id.replace("tab-", "") : secs[0].id;
-  }
   window.addEventListener("hashchange", function () { select(fromHash(), false); });
 
   select(fromHash(), false);

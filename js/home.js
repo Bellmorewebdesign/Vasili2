@@ -1,70 +1,26 @@
-/* Homepage: object stage with four curated slides, then a compact collection composition. */
+/* Homepage: hero photograph, featured pieces, collection tiles and the image-and-text section. */
 (function () {
   "use strict";
   var V = window.VASILI;
-  var stage = document.getElementById("stage");
-  var count = document.getElementById("stage-count");
-  var view = document.getElementById("stage-view");
-  var slides = V.slides;
-  var current = 0;
+  var H = V.home;
 
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  document.getElementById("hero-media").innerHTML =
+    V.img(H.heroImage, { sizes: "(max-width: 900px) 100vw, 55vw", eager: true });
 
-  stage.innerHTML = slides.map(function (s, i) {
-    var p = V.product(s.product);
-    return '<div class="slide' + (i === 0 ? " is-active" : "") + '" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + slides.length + '"' + (i === 0 ? "" : ' aria-hidden="true"') + ">" +
-      '<div class="slide__main">' + V.img(s.image, { variant: "stage", sizes: "(max-width: 820px) 86vw, 40vw", eager: i === 0 }) + "</div>" +
-      '<figure class="slide__inset">' + V.img(s.inset, { sizes: "(max-width: 820px) 30vw, 15vw" }) + "</figure>" +
-      '<span class="visually-hidden">Item ' + p.number + "</span>" +
-      "</div>";
+  document.getElementById("featured").innerHTML = H.featured.map(function (id) {
+    return V.card(V.product(id), { sizes: "(max-width: 760px) 50vw, (max-width: 1100px) 33vw, 25vw" });
   }).join("");
 
-  var els = stage.querySelectorAll(".slide");
+  document.getElementById("ctiles").innerHTML = H.collections.map(function (id) {
+    var c = V.collection(id);
+    return '<li class="ctile"><a href="collection.html?id=' + c.id + '">' +
+      V.media(c.tileImage, { ratio: "r-45", zoom: true, sizes: "(max-width: 900px) 100vw, 33vw" }) +
+      '<div class="ctile__body"><span class="eyebrow">Collection</span><h3 class="h3">' + V.esc(c.title) + "</h3>" +
+      '<p class="ph ph-1">[Short description]</p>' +
+      '<span class="link">View collection <span class="arr" aria-hidden="true">&rarr;</span></span></div>' +
+      "</a></li>";
+  }).join("");
 
-  function show(i) {
-    current = (i + slides.length) % slides.length;
-    els.forEach(function (el, k) {
-      var on = k === current;
-      el.classList.toggle("is-active", on);
-      if (on) el.removeAttribute("aria-hidden"); else el.setAttribute("aria-hidden", "true");
-    });
-    count.textContent = pad(current + 1) + " / " + pad(slides.length);
-    view.href = "product.html?id=" + encodeURIComponent(slides[current].product);
-  }
-
-  document.getElementById("stage-prev").addEventListener("click", function () { show(current - 1); });
-  document.getElementById("stage-next").addEventListener("click", function () { show(current + 1); });
-  stage.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowLeft") { e.preventDefault(); show(current - 1); }
-    if (e.key === "ArrowRight") { e.preventDefault(); show(current + 1); }
-  });
-
-  /* Swipe on touch and pen. Vertical scrolling stays native (touch-action: pan-y). */
-  var startX = null, startY = null;
-  stage.addEventListener("pointerdown", function (e) {
-    if (e.pointerType === "mouse") return;
-    startX = e.clientX; startY = e.clientY;
-  });
-  stage.addEventListener("pointerup", function (e) {
-    if (startX === null) return;
-    var dx = e.clientX - startX, dy = e.clientY - startY;
-    startX = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
-  });
-  stage.addEventListener("pointercancel", function () { startX = null; });
-
-  show(0);
-
-  /* Collection composition: tall City, smaller offset NIC, quiet video frame. */
-  var tall = V.collection(V.homeCollections.tall);
-  var small = V.collection(V.homeCollections.small);
-  function tile(c, cls, sizes) {
-    return '<div class="' + cls + '"><a class="coll-tile" href="collection.html?id=' + c.id + '">' +
-      '<div class="cover">' + V.img(c.tileImage, { sizes: sizes }) + "</div>" +
-      '<span class="coll-tile__name"><span>' + V.esc(c.title) + "</span></span></a></div>";
-  }
-  document.getElementById("home-coll").innerHTML =
-    tile(tall, "home-coll__city", "(max-width: 820px) 82vw, 40vw") +
-    tile(small, "home-coll__nic", "(max-width: 820px) 58vw, 24vw") +
-    '<div class="home-coll__video"><div class="placeholder-box placeholder-box--video">[Video]</div></div>';
+  document.getElementById("about-media").innerHTML =
+    V.media(H.aboutImage, { ratio: "r-45", sizes: "(max-width: 900px) 100vw, 50vw" });
 })();
